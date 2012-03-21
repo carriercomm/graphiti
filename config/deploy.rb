@@ -8,16 +8,18 @@ set :user, "graphiti"
 set :use_sudo, false
 set :normalize_asset_timestamps, false
 
-# Use ruby 1.9 bundler
-set :bundle_cmd, "/usr/local/ruby/1.9.3-p125/bin/bundle"
+# Use ruby 1.9 bundler, rake, etc
+set :default_environment, {
+  'PATH' => "/usr/local/ruby/1.9.3-p125/bin:$PATH"
+}
 
-set :unicorn_binary, "/usr/local/rvm/gems/ruby-1.9.2-p0/bin/unicorn"
+set :unicorn_binary, "unicorn"
 set :unicorn_config, "#{current_path}/config/unicorn.rb"
 set :unicorn_pid, "#{current_path}/tmp/pids/unicorn.pid"
 
 namespace :deploy do
   task :start, :roles => :app, :except => { :no_release => true } do
-    run "cd #{current_path} && #{bundle_cmd} exec #{unicorn_binary} -c #{unicorn_config} -E production -D"
+    run "cd #{current_path} && bundle exec #{unicorn_binary} -c #{unicorn_config} -E production -D"
   end
   task :stop, :roles => :app, :except => { :no_release => true } do
     run "kill `cat #{unicorn_pid}`"
@@ -43,10 +45,9 @@ namespace :graphiti do
   end
 
   task :compress do
-    run "cd #{release_path} && #{bundle_cmd} exec jim compress"
+    run "cd #{release_path} && bundle exec jim compress"
   end
 end
 
 after "deploy:update_code", "graphiti:link_configs"
-after "deploy:update_code", "bundler:install_gems"
 after "deploy:update_code", "graphiti:compress"
