@@ -13291,7 +13291,6 @@ Graphiti = window.Graphiti || {};
 
 Graphiti.initTimeFramePicker = function(){
   var tf = Graphiti.getTimeFrame();
-  console.log("init to " + tf);
   if (tf) $("#time-frame option[value='" + tf + "']").attr('selected', 'selected');
 
   $("#time-frame").change(Graphiti.setTimeFrame);
