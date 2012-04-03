@@ -11,7 +11,9 @@
       "jscolor",
       "extensions",
       "graph",
-      "app"
+      "app",
+      "refresh",
+      "time-frame"
     ]
   }
 }
