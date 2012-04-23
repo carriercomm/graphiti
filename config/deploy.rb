@@ -51,3 +51,8 @@ end
 
 after "deploy:update_code", "graphiti:link_configs"
 after "deploy:update_code", "graphiti:compress"
+
+desc "Refresh metrics"
+task :metrics, :roles => :db, :only => {:primary => true} do
+  run "cd #{current_path} && #{rake} graphiti:metrics"
+end
