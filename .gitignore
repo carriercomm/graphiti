@@ -4,3 +4,4 @@
 config/settings.yml
 config/amazon_s3.yml
 log
+tmp
