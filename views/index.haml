@@ -27,12 +27,14 @@
             + New Graph
   #container
     #view-controls
-      %label{for: 'time-frame'}
-        Time frame:
-        %select#time-frame{name: 'time-frame'}
-          %option{value: ''} graph default
-          - Graphiti.settings.time_frames.each do |name, value|
-            %option{value: value}= name
+      %span#time-frame{title: '(units: s, min, h, d, mon)'}
+        Custom time frame:
+        %label{for: 'from'}
+          from
+          %input{name: 'from', size: 4}
+        %label{for: 'until'}
+          until
+          %input{name: 'until', size: 4}
 
       %label{for: 'auto-refresh'}
         %input#auto-refresh{:name => 'auto-refresh', :type => 'checkbox', :checked => Graphiti.settings.auto_refresh['enabled'], 'data-interval' => Graphiti.settings.auto_refresh['interval']}
