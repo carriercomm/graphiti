@@ -79,7 +79,8 @@ class Graphiti < Sinatra::Base
   end
 
   post '/graphs/:uuid/snapshot' do
-    url = Graph.snapshot(params[:uuid])
+    options = params.select{|k,v| %w(from until).include?(k) }
+    url = Graph.snapshot(params[:uuid], options)
     json :url => url
   end
 
