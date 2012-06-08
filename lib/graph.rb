@@ -20,10 +20,12 @@ class Graph
     nil
   end
 
-  def self.snapshot(uuid)
+  def self.snapshot(uuid, options)
     graph = find(uuid)
     return nil if !graph
     url = graph['url'].gsub(/\#.*$/,'')
+    url += "&from=#{options['from']}" if options['from']
+    url += "&until=#{options['until']}" if options['until']
     response = Typhoeus::Request.get(url, :timeout => 20000)
     return false if !response.success?
     graph_data = response.body

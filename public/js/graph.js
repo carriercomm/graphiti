@@ -167,6 +167,7 @@ Graphiti.Graph.prototype = {
     $.ajax({
       type: 'post',
       dataType: 'json',
+      data: Graphiti.timeFrameOptions(),
       url: '/graphs/' + uuid + '/snapshot',
       success: function(json) {
         callback(json.url);
