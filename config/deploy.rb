@@ -8,11 +8,6 @@ set :user, "graphiti"
 set :use_sudo, false
 set :normalize_asset_timestamps, false
 
-# Use ruby 1.9 bundler, rake, etc
-set :default_environment, {
-  'PATH' => "/usr/local/ruby/1.9.3-p125/bin:$PATH"
-}
-
 set :unicorn_binary, "unicorn"
 set :unicorn_config, "#{current_path}/config/unicorn.rb"
 set :unicorn_pid, "#{current_path}/tmp/pids/unicorn.pid"
